@@ -214,4 +214,13 @@ class LineBentView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : LineBentView {
+            val view : LineBentView = LineBentView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }

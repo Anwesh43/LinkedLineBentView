@@ -36,7 +36,7 @@ fun Canvas.drawBentLine(gap : Float, size : Float, sc : Float, paint : Paint) {
     translate(gap, 0f)
     drawLine(0f, 0f, size, 0f, paint)
     rotate(90f * sc)
-    drawLine(0f, 0f, 0f, -size, paint)
+    drawLine(0f, 0f, -size, 0f, paint)
     restore()
 }
 
@@ -53,8 +53,10 @@ fun Canvas.drawLBNode(i : Int, scale : Float, paint : Paint) {
     save()
     translate(w / 2, gap * (i + 1))
     for (j in 0..(lines - 1)) {
+        val sc1j : Float = sc1.divideScale(j, lines)
+        val sc2j : Float = sc2.divideScale(j, lines)
         val sf : Float = 1f - 2 * j
-        drawBentLine((w / 2 - size) * sf * sc2.divideScale(j, lines), size, sc1.divideScale(j, lines), paint)
+        drawBentLine((w / 2 - size) * sf * (1 - sc2j), size * sf, sc1j * sf, paint)
     }
     restore()
 }
